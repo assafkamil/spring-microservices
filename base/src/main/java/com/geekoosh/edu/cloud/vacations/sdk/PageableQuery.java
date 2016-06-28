@@ -4,9 +4,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public class PageableQuery implements Pageable {
-    private int pageNumber;
-    private int pageSize;
-    private int offset;
+    private int pageNumber = 0;
+    private int pageSize = 5;
+    private int offset = 0;
     private Sort sort;
 
     public PageableQuery(int pageNumber, int pageSize, int offset, Sort sort) {
@@ -29,6 +29,9 @@ public class PageableQuery implements Pageable {
 
     public PageableQuery(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public PageableQuery() {
     }
 
     public int getPageNumber() {
