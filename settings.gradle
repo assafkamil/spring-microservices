@@ -1,0 +1,6 @@
+rootProject.name = 'vacations'
+include 'base'
+include 'base-test'
+include 'users'
+include 'users-sdk'
+

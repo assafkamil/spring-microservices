@@ -1,0 +1,6 @@
+<dataset>
+    <User id="5" username="david"/>
+    <User id="12" username="mark"/>
+
+    <Preference id="3" preference_type="Sun and beach"/>
+</dataset>

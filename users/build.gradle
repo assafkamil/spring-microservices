@@ -1,0 +1,22 @@
+apply plugin: 'org.flywaydb.flyway'
+
+task devFlyway(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+    extension = new org.flywaydb.gradle.FlywayExtension()
+    extension.driver = "com.mysql.jdbc.Driver"
+    extension.url = 'jdbc:mysql://localhost:3306/vacations'
+    extension.user = 'vacations'
+    extension.password = '123456'
+    extension.sqlMigrationPrefix = "V"
+    extension.outOfOrder = true
+    extension.schemas = ['vacations']
+}
+
+group 'com.geekoosh.edu.cloud.vacations'
+version '0.0.1'
+
+ext.projectType = "microservice"
+ext.db = true
+
+dependencies {
+    compile project(":users-sdk")
+}
