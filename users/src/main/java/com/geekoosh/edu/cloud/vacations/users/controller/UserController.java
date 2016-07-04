@@ -6,6 +6,7 @@ import com.geekoosh.edu.cloud.vacations.users.sdk.UserResponse;
 import com.geekoosh.edu.cloud.vacations.users.sdk.UsersSDK;
 import com.geekoosh.edu.cloud.vacations.users.services.UserService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 
 @RestController
 public class UserController implements UsersSDK {
+
+    private Logger logger;
 
     @Autowired
     private UserService userService;
