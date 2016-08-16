@@ -1,6 +1,6 @@
 create table user (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(45) DEFAULT NULL
+  username VARCHAR(45) UNIQUE DEFAULT NULL
 );
 
 create table preference (

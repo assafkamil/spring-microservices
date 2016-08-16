@@ -1,0 +1,2 @@
+ext.db = true
+ext.projectType = "microservice"

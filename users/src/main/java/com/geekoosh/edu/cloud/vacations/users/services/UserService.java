@@ -7,9 +7,10 @@ import com.geekoosh.edu.cloud.vacations.users.repository.OrderRepository;
 import com.geekoosh.edu.cloud.vacations.users.repository.PreferenceRepository;
 import com.geekoosh.edu.cloud.vacations.users.repository.UserRepository;
 import com.geekoosh.edu.cloud.vacations.users.sdk.CreateUserRequest;
+import com.geekoosh.edu.cloud.vacations.users.sdk.UserExistsException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,16 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
-    @Transactional(readOnly = false)
-    public User newUser(CreateUserRequest createUserRequest) {
-        User newUser = modelMapper.map(createUserRequest, User.class);
-        userRepository.save(newUser);
+    @Transactional(readOnly = false, rollbackFor = UserExistsException.class)
+    public User newUser(CreateUserRequest createUserRequest) throws UserExistsException {
+        try {
+            User newUser = modelMapper.map(createUserRequest, User.class);
+            userRepository.save(newUser);
 
-        return newUser;
+            return newUser;
+        } catch(DataIntegrityViolationException e) {
+            throw new UserExistsException(createUserRequest.getUsername(), e);
+        }
     }
 
     public List<User> getUsers(Pageable pageable) {

@@ -3,6 +3,7 @@ package com.geekoosh.edu.cloud.vacations.users;
 import com.geekoosh.edu.cloud.vacations.sdk.PageableQuery;
 import com.geekoosh.edu.cloud.vacations.tests.TestRibbonConfig;
 import com.geekoosh.edu.cloud.vacations.users.sdk.CreateUserRequest;
+import com.geekoosh.edu.cloud.vacations.users.sdk.UserExistsException;
 import com.geekoosh.edu.cloud.vacations.users.sdk.UserResponse;
 import com.geekoosh.edu.cloud.vacations.users.sdk.UsersSDK;
 import org.flywaydb.test.annotation.FlywayTest;
@@ -33,7 +34,7 @@ public class TestSDK extends TestRibbonConfig {
 
     @Test
     @FlywayTest
-    public void testInsert() {
+    public void testInsert() throws UserExistsException {
         UserResponse userResponse = users.newUser(new CreateUserRequest("userA"));
         assertEquals(userResponse.getUsername(), "userA");
         assertEquals((long)userResponse.getId(), 1L);

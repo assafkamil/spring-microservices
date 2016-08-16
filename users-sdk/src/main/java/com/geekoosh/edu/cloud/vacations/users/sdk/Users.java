@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface Users {
     @RequestMapping(name="/user", method = RequestMethod.POST)
-    UserResponse newUser(@RequestBody CreateUserRequest createUserRequest);
+    UserResponse newUser(@RequestBody CreateUserRequest createUserRequest) throws UserExistsException;
 
     @RequestMapping(name="/user", method = RequestMethod.GET)
     List<UserResponse> users(Pageable pageable);
