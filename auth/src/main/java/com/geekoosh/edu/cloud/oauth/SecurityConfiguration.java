@@ -18,6 +18,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class SecurityConfiguration  extends AuthorizationServerConfigurerAdapter {
+
+    //oauth2 private key can be taken from vault at bootstrapping stage
     @Value("${config.oauth2.privateKey}")
     private String privateKey;
 
@@ -29,7 +31,6 @@ public class SecurityConfiguration  extends AuthorizationServerConfigurerAdapter
         oauthServer
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
-        //endpoints.tokenStore(new JdbcTokenStore(dataSource)).authenticationManager(authenticationManager);
     }
 
     @Bean

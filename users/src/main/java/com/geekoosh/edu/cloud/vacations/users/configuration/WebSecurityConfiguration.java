@@ -1,4 +1,4 @@
-package com.geekoosh.edu.cloud.oauth;
+package com.geekoosh.edu.cloud.vacations.users.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-
-
     @Override
     @Autowired // <-- This is crucial otherwise Spring Boot creates its own
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,20 +27,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .withUser("admin").password("password")
                 .roles("USER", "ADMIN")
-        ;
-    }
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/oauth/token").permitAll()
         ;
     }
 }
